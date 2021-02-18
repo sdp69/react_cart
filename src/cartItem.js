@@ -18,9 +18,42 @@ class CartItem extends React.Component{    //this is a class based component.
             qty: 1,
             img: ``
         };
+        this.testing();
     }
-    clickHandler = () => {
-        console.log(`test`, this.state);
+    testing() {
+        const promise = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve(`DONE!`);
+            }, 5000);
+        });
+        promise.then(() => {
+            this.setState({qty: this.state.qty + 10}); //this here now basically acts like a synchronous call.
+            this.setState({qty: this.state.qty + 10});
+            this.setState({qty: this.state.qty + 10});
+            console.log(this.state);
+        });
+    };
+    clickHandler = () => { //this.setState() is an asynchronous function
+        //console.log(`clicked`);
+       // this.setState(
+            //{qty: this.state.qty + 1});
+        this.setState((prevState) => {
+            return {
+                qty: prevState.qty + 1
+            }
+        }, () => {
+            console.log(`this->state updated`, this.state);
+        });
+    };
+    numberDecrease = () => {
+        if (this.state.qty === 1){
+            return;
+        }
+        this.setState((prevState) => {
+            return {
+                qty: prevState.qty - 1
+            }
+        });
     };
     render() {
         const {price, title, qty} = this.state;
@@ -36,7 +69,7 @@ class CartItem extends React.Component{    //this is a class based component.
                 <div className="cart-item-actions">
                     {/* BUTTONS */}
                     <img src="https://www.flaticon.com/svg/vstatic/svg/992/992651.svg?token=exp=1613401642~hmac=0da9bd1e556e9dc285a996c1aff88ccb" className = "action-icons" alt="" onClick={this.clickHandler} />
-                    <img  src="https://www.flaticon.com/svg/vstatic/svg/864/864373.svg?token=exp=1613567843~hmac=555e39705afdd977e3d96351843c6ec1" alt="" className = "action-icons" />
+                    <img  src="https://www.flaticon.com/svg/vstatic/svg/864/864373.svg?token=exp=1613567843~hmac=555e39705afdd977e3d96351843c6ec1" alt="" className = "action-icons" onClick={this.numberDecrease}/>
                     <img src="https://www.flaticon.com/svg/vstatic/svg/3994/3994925.svg?token=exp=1613402132~hmac=2df6957a45fb47d9cfa68813a7864801" alt="" className = "action-icons"/>
                 </div>
             </div>
