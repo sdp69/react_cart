@@ -1,12 +1,12 @@
 import logo from './logo.svg';
 import './App.css';
-import CartItem from "./cartItem";
+import Cart from "./Cart";
 
 function App() {
   return (
     <div className="App">
       <h1>CART</h1>
-        <CartItem/>
+        <Cart/>
     </div>
   );
 }
