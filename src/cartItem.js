@@ -13,26 +13,10 @@ class CartItem extends React.Component{    //this is a class based component.
     constructor() {
         super();
         this.state = {
-            price: 999,
-            title: `Cell Phone`,
-            qty: 1,
-            img: ``
+            ...this.props
         };
-        this.testing();
     }
-    testing() {
-        const promise = new Promise((resolve, reject) => {
-            setTimeout(() => {
-                resolve(`DONE!`);
-            }, 5000);
-        });
-        promise.then(() => {
-            this.setState({qty: this.state.qty + 10}); //this here now basically acts like a synchronous call.
-            this.setState({qty: this.state.qty + 10});
-            this.setState({qty: this.state.qty + 10});
-            console.log(this.state);
-        });
-    };
+
     clickHandler = () => { //this.setState() is an asynchronous function
         //console.log(`clicked`);
        // this.setState(
@@ -56,7 +40,7 @@ class CartItem extends React.Component{    //this is a class based component.
         });
     };
     render() {
-        const {price, title, qty} = this.state;
+        const {price, title, qty} = this.props;
         return(
         <div   className="cart-item">
             <div  className="left-block">
