@@ -12,9 +12,7 @@ class CartItem extends React.Component{    //this is a class based component.
 
     constructor() {
         super();
-        this.state = {
-            ...this.props
-        };
+
     }
 
     clickHandler = () => { //this.setState() is an asynchronous function
@@ -52,9 +50,9 @@ class CartItem extends React.Component{    //this is a class based component.
                 <div style={{color: '#777'}}>Qty: {qty}</div>
                 <div className="cart-item-actions">
                     {/* BUTTONS */}
-                    <img src="https://www.flaticon.com/svg/vstatic/svg/992/992651.svg?token=exp=1613401642~hmac=0da9bd1e556e9dc285a996c1aff88ccb" className = "action-icons" alt="" onClick={this.clickHandler} />
-                    <img  src="https://www.flaticon.com/svg/vstatic/svg/864/864373.svg?token=exp=1613567843~hmac=555e39705afdd977e3d96351843c6ec1" alt="" className = "action-icons" onClick={this.numberDecrease}/>
-                    <img src="https://www.flaticon.com/svg/vstatic/svg/3994/3994925.svg?token=exp=1613402132~hmac=2df6957a45fb47d9cfa68813a7864801" alt="" className = "action-icons"/>
+                    <img src="https://www.flaticon.com/svg/vstatic/svg/992/992651.svg?token=exp=1613401642~hmac=0da9bd1e556e9dc285a996c1aff88ccb" className = "action-icons" alt="" onClick={() => this.props.incrementHandler(this.props)} />
+                    <img  src="https://www.flaticon.com/svg/vstatic/svg/864/864373.svg?token=exp=1613567843~hmac=555e39705afdd977e3d96351843c6ec1" alt="" className = "action-icons" onClick={() => this.props.decrementHandler(this.props)}/>
+                    <img src="https://www.flaticon.com/svg/vstatic/svg/3994/3994925.svg?token=exp=1613402132~hmac=2df6957a45fb47d9cfa68813a7864801" alt="" className = "action-icons" onClick={() => this.props.removeItemHandler(this.props)}/>
                 </div>
             </div>
         </div>);
