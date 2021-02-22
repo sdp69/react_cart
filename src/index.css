@@ -18,8 +18,10 @@ body {
   margin-left: 20px;
 
 }
+
 .cart-item-actions{
   margin-top: 20px;
+  display: inline-flex;
 }
 .action-icons{
   margin-top: 20px;
@@ -28,12 +30,20 @@ body {
   height: 30px;
   width: 30px;
   margin-right: 10px;
+  transition: transform .2s;
 }
-.actions-icons:hover{
-  cursor: pointer;
+.actions-icons:focus{
+  height: 35px;
+  width: 35px;
 }
 .cart{
   display: flex;
   flex-direction: column;
   padding-left: 20px;
+}
+.custom{
+  transition: transform .2s;
+}
+.custom:hover{
+  transform: scale(1.2);
 }

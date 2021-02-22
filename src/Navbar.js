@@ -5,7 +5,7 @@ const Navbar = (props) => {    //this is a class based component.
        return (
            <div style={styles.nav}>
                <div style={styles.cartIconContainer}>
-                   <img src="https://www.flaticon.com/svg/vstatic/svg/1124/1124199.svg?token=exp=1613742594~hmac=1d25dd246c75d650500713f1260139ba" alt="cart-icon"
+                   <img src="https://img.icons8.com/pastel-glyph/64/000000/shopping-trolley--v1.png" alt="cart-icon"
                         style={styles.cartIcon}/>
                    <span style={styles.cartCount}>{props.navbarCounter}</span>
                </div>
@@ -20,13 +20,14 @@ const styles = {
     },
     nav: {
         height: 70,
-        background: `#4267b2`,
+        background: `#CCFF33`,
         display: `flex`,
         justifyContent: `flex-end`,
-        alignItems: `center`
+        alignItems: `center`,
+        padding: 2
     },
     cartIconContainer: {
-        position: `relative`
+        position: `relative`,
     },
     cartCount: {
         background: `yellow`,

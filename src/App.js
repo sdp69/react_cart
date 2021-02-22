@@ -3,35 +3,33 @@ import './App.css';
 import Cart from "./Cart";
 import Navbar from "./Navbar";
 import React from "react";
-
+import firebase from "firebase";
 class App extends React.Component {
     constructor() {
         super();
-        this.state = {
-            products: [{
-                id: 1,
-                price: 999,
-                title: `Cell Phone`,
-                qty: 1,
-                img: `https://images.unsplash.com/photo-1565849904461-04a58ad377e0?ixid=MXwxMjA3fDB8MHxzZWFyY2h8NHx8Y2VsbCUyMHBob25lfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60`
-            },
-                {
-                    id: 2,
-                    price: 1099,
-                    title: `Watch`,
-                    qty: 1,
-                    img: `https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Nnx8d2F0Y2h8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60`
-                },
-                {
-                    id: 3,
-                    price: 2999,
-                    title: `T.V`,
-                    qty: 1,
-                    img: `https://images.unsplash.com/photo-1593305841991-05c297ba4575?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MjV8fHR2fGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60`
-                }
-            ]
-        }
+        this.state={
+            products: [],
+            loading: true
+        };
     }
+    componentDidMount() {
+        firebase.firestore()
+            .collection(`products`)
+            .get()
+            .then((snapshot) => {
+                    snapshot.docs.map((doc) => {
+                    console.log(doc.data());
+            });
+            const products = snapshot.docs.map((doc) => {
+                return doc.data();
+            });
+            this.setState({
+                products: products,
+                loading: false
+            });
+        });
+    }
+
     incrementHandler = (product) => {
         const{title} = product;
         const {products} = this.state;
@@ -81,7 +79,8 @@ class App extends React.Component {
         return total;
     };
     render() {
-        const {products} = this.state;
+        const {products, loading} = this.state;
+        console.log(products);
         return (
             <div className="App">
                 <Navbar navbarCounter = {this.navbarCount()}/>
@@ -94,6 +93,7 @@ class App extends React.Component {
                       products={products}
                 />
                 <div style={{padding: 20, fontSize: 20}}>TOTAL: {this.priceTotal()}</div>
+                {loading && <h1>Loading Products....</h1>}
             </div>
         );
     }
